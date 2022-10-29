@@ -20,7 +20,11 @@ dbConnection();
 
 // Rutas
 app.use( '/api/usuarios', require('./routes/usuarios') );
+app.use( '/api/administrativos', require('./routes/administrativos') );
+app.use( '/api/docentes', require('./routes/docentes') );
+app.use( '/api/todo', require('./routes/busquedas') );
 app.use( '/api/login', require('./routes/auth') );
+app.use( '/api/upload', require('./routes/uploads') );
 
 
 
