@@ -48,24 +48,71 @@ const crearDocentes = async (req, res = response) => {
     }
 }
 
-const actializarDocentes = (req, res = response) => {
-    // TODO: Validar token y comprobar si es el usuario correcto
-    res.json({
-        ok: true,
-        msg: 'actializarDocentes'
-    });
+const actualizarDocentes = async (req, res = response) => {
+    const id =  req.params.id; 
+    const uid = req.uid;
+
+    try {
+        const docenteDB = await Docente.findById( id );
+        if ( !docenteDB ) {
+            return res.status(404).json({
+                ok: true,
+                msg: 'Docente no encontrado por ID'
+            });
+            
+        }
+
+        const cambiosDocente = {
+            ...req.body,
+            usuario: uid
+        }
+        const docenteActualizado = await Docente.findByIdAndUpdate( id, cambiosDocente, { new: true } );
+
+        res.json({
+            ok: true,
+            docente: docenteActualizado
+        });
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado'
+        });
+    }
 }
 
-const borrarDocentes = ( req, res = response ) => {
-    res.json({
-        ok:true,
-        msg: 'borrarDocentes'
-    })
+const borrarDocentes = async( req, res = response ) => {
+    const id =  req.params.id; 
+
+    try {
+        const docenteBD = await Docente.findById( id );
+        if ( !docenteBD ) {
+            return res.status(404).json({
+                ok: true,
+                msg: 'Docente no encontrado por ID'
+            });
+        }
+
+        await Docente.findByIdAndDelete( id );
+
+        res.json({
+            ok: true,
+            msg:'Docente eliminado'
+        });
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado'
+        });
+    }
 }
 
 module.exports = {
     getDocentes,
     crearDocentes,
-    actializarDocentes,
+    actualizarDocentes,
     borrarDocentes
 }
