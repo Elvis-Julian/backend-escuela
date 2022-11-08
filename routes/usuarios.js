@@ -27,7 +27,6 @@ const router = Router();
         validarJWT,
         check('nombre', 'El nombre es requerido').not().isEmpty(),
         check('email', 'El correo es requerido').isEmail(),
-        check('role', 'El rol es requerido').not().isEmpty(),
         validarCampos,
     ],
     actializarUsuario 
