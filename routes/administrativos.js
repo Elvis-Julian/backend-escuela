@@ -22,6 +22,9 @@ const router = Router();
         validarJWT,
         check('idUsuario', 'El ID del administrativo es necesario').not().isEmpty(),
         check('nombre', 'El nombre del administrativo es necesario').not().isEmpty(),
+        check('fecha', 'La fecha es necesaria').not().isEmpty(),
+        check('hora_ent', 'La hora de entrada es necesaria').not().isEmpty(),
+        check('hora_sld', 'La hora de salida es necesaria').not().isEmpty(),
         validarCampos
     ],
     crearAdministrativos 
@@ -32,6 +35,9 @@ const router = Router();
         validarJWT,
         check('idUsuario', 'El ID del administrativo es necesario').not().isEmpty(),
         check('nombre', 'El nombre del administrativo es necesario').not().isEmpty(),
+        check('fecha', 'La fecha es necesaria').not().isEmpty(),
+        check('hora_ent', 'La hora de entrada es necesaria').not().isEmpty(),
+        check('hora_sld', 'La hora de salida es necesaria').not().isEmpty(),
         validarCampos
     ],
     actualizarAdministrativos

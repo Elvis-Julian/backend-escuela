@@ -11,6 +11,15 @@ const AdministrativoSchema = Schema({
         type: String,
         required: true
     },
+    fecha: {
+        type: String
+    },
+    hora_ent: {
+        type: String 
+    },
+    hora_sld: {
+        type: String
+    },
     img: {
         type: String,
     },
