@@ -3,6 +3,7 @@ const  bcrypt  = require('bcryptjs');
 
 const Usuario = require('../models/usuario');
 const { generateJWT } = require('../helpers/jwt');
+const { getMenuFronted } = require('../helpers/menu-fronted');
 
 const login = async (req, res = response) => {
 
@@ -33,11 +34,11 @@ const login = async (req, res = response) => {
         //Generar el TOKEN - JWT
         const token = await generateJWT( usuarioDB.id );
 
-
         res.json({
             ok: true,
-            token
-        })
+            token,
+            menu: getMenuFronted( usuarioDB.role )
+        });
 
     } catch (error) {
         console.log(error);
@@ -61,7 +62,8 @@ const renewToken = async (req, res  = response) => {
     res.json({
         ok: true,
         token,
-        usuario
+        usuario,
+        menu: getMenuFronted( usuario.role )
     });
 }
 

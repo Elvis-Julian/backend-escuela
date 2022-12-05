@@ -22,6 +22,9 @@ const router = Router();
         validarJWT,
         check('idUsuario', 'El ID del docente es necesario').not().isEmpty(),
         check('nombre', 'El nombre del docente es necesario').not().isEmpty(),
+        check('fecha', 'La fecha es necesaria').not().isEmpty(),
+        check('hora_ent', 'La hora de entrada es requerida').not().isEmpty(),
+        check('hora_sld', 'La hora de salida es requerida').not().isEmpty(),
         validarCampos
     ],
     crearDocentes 
@@ -32,6 +35,9 @@ const router = Router();
         validarJWT,
         check('idUsuario', 'El ID del docente es necesario').not().isEmpty(),
         check('nombre', 'El nombre del docente es necesario').not().isEmpty(),
+        check('fecha', 'La fecha es necesaria').not().isEmpty(),
+        check('hora_ent', 'La hora de entrada es requerida').not().isEmpty(),
+        check('hora_sld', 'La hora de salida es requerida').not().isEmpty(),
         validarCampos 
     ],
     actualizarDocentes

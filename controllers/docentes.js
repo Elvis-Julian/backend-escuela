@@ -5,13 +5,21 @@ const Docente = require('../models/docentes');
 // const { generateJWT } = require('../helpers/jwt');
 
 
-const getDocentes = async (req, res = response) => {
-    const docentes = await Docente.find()
-                                    .populate('usuario', 'nombre')
+const getDocentes = async (req, res) => {
+
+    const desde = Number(req.query.desde) || 0;
+    const [docentes, total] = await Promise.all([
+        Docente
+        .find({}, 'idUsuario nombre fecha hora_ent hora_sld img') // Definen los datos a mostrar
+        .skip( desde )
+        .limit( 5 ),
+    Docente.countDocuments()
+    ])
     // Se define que se obtiene en la consulta
     res.json({
         ok: true,
-        docentes
+        docentes,
+        total
     });
 
 }
